@@ -1,6 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+
+
+class User(AbstractUser):
+    pass
 
 class Inquilino(models.Model):
     question_text = models.CharField(max_length=200)
@@ -44,14 +49,15 @@ class Contrato(models.Model):
 	# montos
 	# observaciones
 
-class Dirección(models.Model):
-	# calle
-	# altura
-	# ciudad
+class Direccion(models.Model):
+	calle = models.CharField(max_length=100)
+	altura = models.IntegerField()
+	ciudad = models.CharField(max_length=100)
 
 class Lugar(models.Model):
-	# direccion
-	# departamento
+	direccion = models.ForeignKey(Direccion, on_delete=models.PROTECT)
+	piso = models.IntegerField()
+	departamento = models.IntegerField()
 
 
 class Observación(models.Model):

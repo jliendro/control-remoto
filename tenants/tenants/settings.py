@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,13 +75,12 @@ WSGI_APPLICATION = 'tenants.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+if DEBUG:
+    DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL')),}
+else:
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600,
+                                                   ssl_require=True,
+                                                   default=os.environ.get('DATABASE_URL'))}
 
 AUTH_USER_MODEL = 'core.User'
 

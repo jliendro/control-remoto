@@ -11,7 +11,7 @@ class User(AbstractUser):
     tipo_documento = models.CharField(max_length=100, null=True, blank=True)
     documento_numero = models.IntegerField(null=True, blank=True)
     pais_nacimiento = models.CharField(max_length=100, default="Argentina")
-    fecha_nacimiento = models.DateTimeField(null=True, blank=True)
+    fecha_nacimiento = models.DateField(null=True, blank=True)
 
 
 class Inquilino(User):
@@ -53,8 +53,8 @@ class Garante(User):
 
 class Pago(models.Model):
     inquilino = models.ForeignKey(Inquilino, on_delete=models.PROTECT)
-    fecha_de_cobro = models.DateTimeField()
-    fecha_de_pago = models.DateTimeField(null=True, blank=True)
+    fecha_de_cobro = models.DateField()
+    fecha_de_pago = models.DateField(null=True, blank=True)
     monto = models.DecimalField(max_digits=7, decimal_places=2,)
 
     descripcion = models.CharField(max_length=200, null=True, blank=True)
@@ -127,12 +127,12 @@ class Lugar(models.Model):
 class Contrato(models.Model):
     UNIDADES = {'E': 'pesos', 'O': 'porcentaje'}
 
-    fecha_firma = models.DateTimeField(null=True, blank=True,
+    fecha_firma = models.DateField(null=True, blank=True,
                                        verbose_name="Fecha de Firma")
 
-    fecha_desde = models.DateTimeField(null=True, blank=True,
+    fecha_desde = models.DateField(null=True, blank=True,
                                        verbose_name="Fecha de inicio")
-    fecha_hasta = models.DateTimeField(null=True, blank=True,
+    fecha_hasta = models.DateField(null=True, blank=True,
                                        verbose_name="Fecha de fin")
 
     inquilino = models.ForeignKey(Inquilino, on_delete=models.PROTECT,
@@ -167,7 +167,7 @@ class Contrato(models.Model):
 class MontoContrato(models.Model):
     cantidad = models.DecimalField(max_digits=7, decimal_places=2,
                                    verbose_name="Precio alquiler")
-    fecha_desde = models.DateTimeField(verbose_name="Desde que fecha se \
+    fecha_desde = models.DateField(verbose_name="Desde que fecha se \
                                                      comienza a cobrar este \
                                                      precio")
     description = models.CharField(max_length=200, null=True, blank=True)
@@ -175,7 +175,7 @@ class MontoContrato(models.Model):
 
 
 class Observacion(models.Model):
-    fecha = models.DateTimeField()
+    fecha = models.DateField()
     description = models.CharField(max_length=200)
     costos_asociados = models.DecimalField(max_digits=7, decimal_places=2,
                                            verbose_name="Costo asociado a la \

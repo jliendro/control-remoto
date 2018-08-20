@@ -28,15 +28,7 @@ admin_site.register(Group, GroupAdmin)
 
 
 class LugarAdmin(admin.ModelAdmin):
-    list_display = ('direccion_ciudad', 'direccion', 'nota')
-
-    def nota(self, obj):
-        nota = ''
-        if obj.departamento:
-            nota += "Dpto {}".format(obj.departamento)
-        if obj.descripcion:
-            nota += obj.descripcion
-        return nota
+    list_display = ('direccion_ciudad', 'direccion', 'ubicacion')
 
     def direccion_ciudad(self, obj):
         return obj.direccion.ciudad
@@ -73,7 +65,8 @@ class GaranteAdmin(admin.ModelAdmin):
         if not filter.exists():
             return None
 
-        return ["{} - {}".format(contrato[0], contrato[1].title()) for contrato in filter]
+        return ["{} - {}".format(contrato[0],
+                                 contrato[1].title()) for contrato in filter]
 
     contratos.empty_value_display = "Sin Contrato"
 

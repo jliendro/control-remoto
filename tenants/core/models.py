@@ -105,12 +105,23 @@ class Lugar(models.Model):
         verbose_name_plural = "Propiedades"
 
     def __str__(self):
-        return "{} - {}".format(self.direccion.ciudad, self.direccion)
+        return "{} - {} - {}".format(self.direccion.ciudad,
+                                     self.direccion,
+                                     self.ubicacion)
 
     direccion = models.ForeignKey(Direccion, on_delete=models.PROTECT)
     piso = models.CharField(max_length=1, choices=PISOS.items())
     departamento = models.CharField(max_length=100, null=True, blank=True)
     descripcion = models.CharField(max_length=100, null=True, blank=True)
+
+    @property
+    def ubicacion(self):
+        nota = '{} '.format(Lugar.PISOS[self.piso])
+        if self.departamento:
+            nota += "Dpto {}".format(self.departamento)
+        if self.descripcion:
+            nota += self.descripcion
+        return nota
 
 
 class Contrato(models.Model):
@@ -127,7 +138,7 @@ class Contrato(models.Model):
     inquilino = models.ForeignKey(Inquilino, on_delete=models.PROTECT,
                                   related_name="inquilino")
     lugar = models.ForeignKey(Lugar, on_delete=models.PROTECT,
-                              verbose_name="Lugar alquilado")
+                              verbose_name="Propiedad")
     interes_diario = models.IntegerField()
     unidad_interes = models.CharField(max_length=1, choices=UNIDADES.items())
     garantes = models.ForeignKey(Garante, on_delete=models.PROTECT)

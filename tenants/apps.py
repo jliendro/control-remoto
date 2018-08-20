@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CoreConfig(AppConfig):
-    name = 'core'
+class TenantsConfig(AppConfig):
+    name = 'tenants'
     verbose_name = 'Propiedades'

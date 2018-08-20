@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#pkyiy3rvx7n%nwlpgyyq+09lq9!i*8q5^a5)0e75j+b7d37z1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
 ALLOWED_HOSTS = ['control-ofelia.herokuapp.com', 'localhost']
 

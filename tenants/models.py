@@ -157,6 +157,10 @@ class Contrato(models.Model):
                                       verbose_name="Valor de dólar al momento \
                                                     de la firma del contrato")
 
+    def __str__(self):
+        year = self.fecha_firma.year if self.fecha_firma else ''
+        return "{} - {}".format(year, self.lugar)
+
     def activo(self):
         if not self.fecha_hasta:
             return False

@@ -1,6 +1,6 @@
 
 from django.contrib.auth.admin import UserAdmin, GroupAdmin
-from .models import (User, Inquilino, Garante, Lugar, Contrato, Direccion, Pago)
+from .models import (User, Inquilino, Garante, Lugar, Contrato, Direccion, Pago, MontoContrato, Observacion)
 
 # Register your models here.
 
@@ -36,6 +36,14 @@ class LugarAdmin(admin.ModelAdmin):
 
     direccion_ciudad.admin_order_field = 'direccion__ciudad'
     direccion_ciudad.short_description = 'Ciudad'
+
+
+class ObservacionAdmin(admin.ModelAdmin):
+    list_display = ('fecha', 'description')
+
+
+class MontoContratoAdmin(admin.ModelAdmin):
+    list_display = ('contrato', 'fecha_desde', 'cantidad')
 
 
 class DireccionAdmin(admin.ModelAdmin):
@@ -111,4 +119,6 @@ admin_site.register(Inquilino, InquilinoAdmin)
 admin_site.register(Garante, GaranteAdmin)
 admin_site.register(Contrato, ContratoAdmin)
 admin_site.register(Pago, PagoAdmin)
+admin_site.register(MontoContrato, MontoContratoAdmin)
+admin_site.register(Observacion, ObservacionAdmin)
 

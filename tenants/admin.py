@@ -29,6 +29,7 @@ admin_site.register(Group, GroupAdmin)
 
 class LugarAdmin(admin.ModelAdmin):
     list_display = ('direccion_ciudad', 'direccion', 'ubicacion')
+    ordering = ['direccion__ciudad', 'direccion', 'departamento']
 
     def direccion_ciudad(self, obj):
         return obj.direccion.ciudad
@@ -72,7 +73,8 @@ class GaranteAdmin(admin.ModelAdmin):
 
 
 class PagoAdmin(admin.ModelAdmin):
-    list_display = ('inquilino', 'origen', 'monto_formato')
+    list_display = ('inquilino', 'origen', 'fecha_de_cobro', 
+                    'fecha_de_pago', 'monto_formato')
 
     def monto_formato(self, obj):
         return '$ %.2f' % obj.monto

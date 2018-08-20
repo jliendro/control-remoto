@@ -55,7 +55,7 @@ class Pago(models.Model):
     inquilino = models.ForeignKey(Inquilino, on_delete=models.PROTECT)
     fecha_de_cobro = models.DateTimeField()
     fecha_de_pago = models.DateTimeField(null=True, blank=True)
-    monto = models.DecimalField(max_digits=5, decimal_places=2,)
+    monto = models.DecimalField(max_digits=7, decimal_places=2,)
 
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     # adjunto
@@ -153,7 +153,7 @@ class Contrato(models.Model):
                                          on_delete=models.PROTECT,
                                          null=True, blank=True,
                                          related_name="contacto_laboral")
-    valor_dolar = models.DecimalField(max_digits=5, decimal_places=2,
+    valor_dolar = models.DecimalField(max_digits=7, decimal_places=2,
                                       verbose_name="Valor de dólar al momento \
                                                     de la firma del contrato")
 
@@ -165,7 +165,7 @@ class Contrato(models.Model):
 
 
 class MontoContrato(models.Model):
-    cantidad = models.DecimalField(max_digits=5, decimal_places=2,
+    cantidad = models.DecimalField(max_digits=7, decimal_places=2,
                                    verbose_name="Precio alquiler")
     fecha_desde = models.DateTimeField(verbose_name="Desde que fecha se \
                                                      comienza a cobrar este \
@@ -177,7 +177,7 @@ class MontoContrato(models.Model):
 class Observacion(models.Model):
     fecha = models.DateTimeField()
     description = models.CharField(max_length=200)
-    costos_asociados = models.DecimalField(max_digits=5, decimal_places=2,
+    costos_asociados = models.DecimalField(max_digits=7, decimal_places=2,
                                            verbose_name="Costo asociado a la \
                                                          observación",
                                            null=True, blank=True)

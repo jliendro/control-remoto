@@ -26,7 +26,7 @@ SECRET_KEY = '#pkyiy3rvx7n%nwlpgyyq+09lq9!i*8q5^a5)0e75j+b7d37z1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['control-ofelia.herokuapp.com/']
+ALLOWED_HOSTS = ['control-ofelia.herokuapp.com', 'localhost']
 
 
 # Application definition

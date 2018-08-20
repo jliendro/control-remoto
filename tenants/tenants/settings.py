@@ -13,30 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import dj_database_url
 
-from pprint import pprint
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-pprint("****************************")
-pprint(STATIC_ROOT)
-pprint("****************************")
-
-STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -45,16 +24,16 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 SECRET_KEY = '#pkyiy3rvx7n%nwlpgyyq+09lq9!i*8q5^a5)0e75j+b7d37z1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', True)
+DEBUG = True
 
-ALLOWED_HOSTS = ['control-ofelia.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'django_extensions',
-    'tenants',
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -64,11 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # static files
-
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'control_ofelia.urls'
+ROOT_URLCONF = 'tenants.urls'
 
 TEMPLATES = [
     {
@@ -95,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'control_ofelia.wsgi.application'
+WSGI_APPLICATION = 'tenants.wsgi.application'
 
 
 # Database
@@ -108,7 +83,7 @@ else:
                                                    ssl_require=True,
                                                    default=os.environ.get('DATABASE_URL'))}
 
-AUTH_USER_MODEL = 'tenants.User'
+AUTH_USER_MODEL = 'core.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -143,3 +118,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+STATIC_URL = '/static/'

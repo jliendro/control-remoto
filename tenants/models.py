@@ -160,7 +160,7 @@ class Contrato(models.Model):
     def activo(self):
         if not self.fecha_hasta:
             return False
-        return self.fecha_hasta >= timezone.now()
+        return self.fecha_hasta >= timezone.now().date()
     activo.boolean = True
 
 
